@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Recipe Site{% endblock %}</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+<body>
+    <header>
+        <a href="{% url 'home' %}">Главная</a>
+
+        {% block header %}
+        <h1>Recipe Site</h1>
+        {% if user.is_authenticated %}
+            <a href="{% url 'user_profile' user.id  %}">{{ user.username }}</a>
+            <a href="{% url 'logout' %}">Выйти</a>
+        {% else %}
+            <p><a href="{% url 'login' %}">Войти</a></p>
+        {% endif %}
+        {% endblock %}
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+
+    </footer>
+</body>
+</html>

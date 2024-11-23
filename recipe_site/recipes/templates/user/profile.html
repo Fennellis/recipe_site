@@ -1,0 +1,23 @@
+{% extends 'recipes/base.html' %}
+
+{% block title %}Профиль {{ user.username }}{% endblock %}
+{% block content %}
+    <h1>{{ user.username }}</h1>
+
+    {% if user.is_authenticated and request.user.id == user.id %}
+        {% if user.id == user.id %}
+            <h2><a href="{% url 'add_recipe' %}">Добавить рецепт</a></h2>
+        {% endif %}
+    {% endif %}
+
+    <h2>Мои рецепты</h2>
+    {% if recipes %}
+        <ul>
+            {% for recipe in recipes %}
+                <li><a href="{% url 'recipe_detail' recipe.id %}">{{ recipe.title }}</a></li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>У вас еще нет рецептов.</p>
+    {% endif %}
+{% endblock %}
